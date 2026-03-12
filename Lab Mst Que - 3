@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DOM Manipulation</title>
+</head>
+<body>
+
+<p id="para">Click the button to change this text.</p>
+
+<button onclick="changeText()">Click Me</button>
+
+<script>
+function changeText(){
+  const paragraph = document.getElementById("para");
+
+  paragraph.innerText = "Wlcm to JavaScript DOM Manipulation";
+  paragraph.style.color = "blue";
+  paragraph.style.fontSize = "24px";
+}
+</script>
+
+</body>
+</html>
