@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Create Post</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    form { max-width: 400px; }
+    input, textarea, button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 8px;
+    }
+    .success {
+      color: green;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Create Post</h2>
+
+  <form id="postForm">
+    <input type="text" id="title" placeholder="Title" required />
+    <textarea id="body" placeholder="Body" required></textarea>
+    <button type="submit">Submit</button>
+  </form>
+
+  <p id="message" class="success"></p>
+
+  <script>
+    const form = document.getElementById('postForm');
+    const message = document.getElementById('message');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const title = document.getElementById('title').value;
+      const body = document.getElementById('body').value;
+
+      try {
+        const response = await fetch('/posts', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ title, body })
+        });
+
+        if (response.ok) {
+          message.textContent = 'Post submitted successfully!';
+          form.reset();
+        } else {
+          message.textContent = 'Failed to submit post.';
+        }
+      } catch (error) {
+        message.textContent = 'Error submitting post.';
+        console.error(error);
+      }
+    });
+  </script>
+
+</body>
+</html>
